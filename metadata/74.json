@@ -1,0 +1,34 @@
+{
+  "name": "74",
+  "description": "Land Parcels",
+  "external_url": "https://gateway.lighthouse.storage/ipfs/bafkreig4dodokivwoqsx56dbuaxscpcib3ycikmdjmhmu5euna4pcxnl4e",
+  "image": "74.png",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "midnight"
+    },
+    {
+      "trait_type": "Plant",
+      "value": "sprout"
+    },
+    {
+      "trait_type": "Pot",
+      "value": "cement-pot"
+    },
+    {
+      "trait_type": "Face",
+      "value": "calm"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "74.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": []
+  }
+}

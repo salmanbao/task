@@ -1,0 +1,34 @@
+{
+  "name": "39",
+  "description": "Land Parcels",
+  "external_url": "https://gateway.lighthouse.storage/ipfs/bafkreig4dodokivwoqsx56dbuaxscpcib3ycikmdjmhmu5euna4pcxnl4e",
+  "image": "39.png",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "woods"
+    },
+    {
+      "trait_type": "Plant",
+      "value": "eucalyptus"
+    },
+    {
+      "trait_type": "Pot",
+      "value": "cauldron"
+    },
+    {
+      "trait_type": "Face",
+      "value": "in-love"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "39.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": []
+  }
+}

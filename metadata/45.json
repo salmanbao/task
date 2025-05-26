@@ -1,0 +1,34 @@
+{
+  "name": "45",
+  "description": "Land Parcels",
+  "external_url": "https://gateway.lighthouse.storage/ipfs/bafkreig4dodokivwoqsx56dbuaxscpcib3ycikmdjmhmu5euna4pcxnl4e",
+  "image": "45.png",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "sands"
+    },
+    {
+      "trait_type": "Plant",
+      "value": "snake-plant"
+    },
+    {
+      "trait_type": "Pot",
+      "value": "foam-planter"
+    },
+    {
+      "trait_type": "Face",
+      "value": "crying"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "45.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": []
+  }
+}
