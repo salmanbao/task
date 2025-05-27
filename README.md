@@ -52,7 +52,7 @@ To deploy the smart contracts, use the provided Hardhat Ignition module and yarn
    ```
 2. **Deploy using Hardhat Ignition:**
    ```shell
-   yarn deploy:network <network-name>
+   yarn deploy:verify <network-name>
    ```
    Replace `<network-name>` with your desired network (e.g., `localhost`, `sepolia`, etc.).
    This will deploy the contracts using the `ignition/modules/LandNFT_AuctionManager.ts` module.

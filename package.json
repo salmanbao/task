@@ -11,6 +11,7 @@
     "test:logs": "hardhat test --trace",
     "watch": "hardhat watch compilation",
     "deploy:network": "hardhat ignition deploy ignition/modules/LandNFT_AuctionManager.ts --network",
+    "deploy:verify": "hardhat ignition deploy ignition/modules/LandNFT_AuctionManager.ts --verify --network ",
     "verify:network": "hardhat verify --network"
   },
   "author": "salmanbao <salmancodez@gmail.com>",

@@ -7,7 +7,7 @@ describe("LandNFT & AuctionManager", function () {
   let auctionManager: any;
   let owner: any, user1: any, user2: any, user3: any;
   let ownerAddr: string, user1Addr: string, user2Addr: string, user3Addr: string;
-  const baseURI = "https://gateway.lighthouse.storage/ipfs/bafybeig4zrg7j5mr6nd7vp7b2xrhadxv6hom2shiernieg22ku5as6encu/";
+  const baseURI = "https://gateway.lighthouse.storage/ipfs/bafybeigsx2gmfxauqithxpsqyzirqjfvqfvf7znckpzcqgwc5zhqnepd2q/";
 
   beforeEach(async function () {
     [owner, user1, user2, user3] = await hre.ethers.getSigners();

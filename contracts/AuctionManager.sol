@@ -3,6 +3,7 @@ pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
 interface ILandNFT is IERC721 {
     function ownerOf(uint256 tokenId) external view returns (address);
@@ -20,6 +21,7 @@ contract AuctionManager is ReentrancyGuard {
     }
 
     ILandNFT public landNFT;
+    IERC2981 public royaltyNFT;
     mapping(uint256 => Auction) public auctions;
     mapping(uint256 => uint256) public landPrices;
     mapping(uint256 => bool) public forSale;
@@ -35,6 +37,7 @@ contract AuctionManager is ReentrancyGuard {
 
     constructor(address _landNFT) {
         landNFT = ILandNFT(_landNFT);
+        royaltyNFT = IERC2981(_landNFT);
     }
 
     // Fixed-price sale functions
@@ -59,7 +62,13 @@ contract AuctionManager is ReentrancyGuard {
         forSale[tokenId] = false;
         landPrices[tokenId] = 0;
         landNFT.safeTransferFrom(seller, msg.sender, tokenId);
-        payable(seller).transfer(price);
+        (address royaltyReceiver, uint256 royaltyAmount) = royaltyNFT.royaltyInfo(tokenId, price);
+        if (royaltyAmount > 0 && royaltyReceiver != address(0)) {
+            payable(royaltyReceiver).transfer(royaltyAmount);
+            payable(seller).transfer(price - royaltyAmount);
+        } else {
+            payable(seller).transfer(price);
+        }
         emit LandPurchased(msg.sender, tokenId, price);
         if (msg.value > price) {
             payable(msg.sender).transfer(msg.value - price);
@@ -113,7 +122,13 @@ contract AuctionManager is ReentrancyGuard {
         auction.active = false;
         if (auction.highestBidder != address(0)) {
             landNFT.safeTransferFrom(address(this), auction.highestBidder, tokenId);
-            payable(auction.seller).transfer(auction.highestBid);
+            (address royaltyReceiver, uint256 royaltyAmount) = royaltyNFT.royaltyInfo(tokenId, auction.highestBid);
+            if (royaltyAmount > 0 && royaltyReceiver != address(0)) {
+                payable(royaltyReceiver).transfer(royaltyAmount);
+                payable(auction.seller).transfer(auction.highestBid - royaltyAmount);
+            } else {
+                payable(auction.seller).transfer(auction.highestBid);
+            }
             emit AuctionEnded(tokenId, auction.highestBidder, auction.highestBid);
         } else {
             landNFT.safeTransferFrom(address(this), auction.seller, tokenId);

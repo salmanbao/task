@@ -8,15 +8,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract LandNFT is ERC721, ERC721URIStorage, ERC721Royalty, Ownable {
-    struct LandMetadata {
-        string name;
-        string coordinates;
-        string size;
-        string uri;
-    }
-
+    
     uint256 private _tokenIdCounter;
-    mapping(uint256 => LandMetadata) private _landMetadata;
+    string private _customBaseURI = "https://gateway.lighthouse.storage/ipfs/bafybeigsx2gmfxauqithxpsqyzirqjfvqfvf7znckpzcqgwc5zhqnepd2q/";
 
     event LandMinted(address indexed to, uint256 indexed tokenId, string uri);
 
@@ -36,7 +30,7 @@ contract LandNFT is ERC721, ERC721URIStorage, ERC721Royalty, Ownable {
 
     function tokenURI(uint256 tokenId)
         public
-        pure
+        view
         override(ERC721, ERC721URIStorage)
         returns (string memory)
     {
@@ -44,8 +38,8 @@ contract LandNFT is ERC721, ERC721URIStorage, ERC721Royalty, Ownable {
         return string.concat(baseURI, Strings.toString(tokenId), ".json");
     }
 
-    function _baseURI() internal pure override returns (string memory) {
-        return "https://gateway.lighthouse.storage/ipfs/bafybeig4zrg7j5mr6nd7vp7b2xrhadxv6hom2shiernieg22ku5as6encu/";
+    function _baseURI() internal view override returns (string memory) {
+        return _customBaseURI;
     }
 
     function setDefaultRoyalty(address receiver, uint96 feeNumerator) external onlyOwner {
@@ -54,6 +48,10 @@ contract LandNFT is ERC721, ERC721URIStorage, ERC721Royalty, Ownable {
 
     function setTokenRoyalty(uint256 tokenId, address receiver, uint96 feeNumerator) external onlyOwner {
         _setTokenRoyalty(tokenId, receiver, feeNumerator);
+    }
+
+    function setBaseURI(string memory newBaseURI) external onlyOwner {
+        _customBaseURI = newBaseURI;
     }
 
     function supportsInterface(bytes4 interfaceId)
